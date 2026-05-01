@@ -1,0 +1,10 @@
+playwright
+pydantic
+pydantic-settings
+python-dotenv
+pandas
+openpyxl
+pdfplumber
+pymupdf
+tenacity
+structlog

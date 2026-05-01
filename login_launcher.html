@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>פתיחת פורטל חברות ביטוח</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 760px;
+      margin: 40px auto;
+      padding: 0 16px 40px;
+      background: #f5f7f9;
+      color: #1f2937;
+    }
+    .card {
+      position: relative;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    /** לוגו בפינה השמאלית העליונה של הכרטיס — בלי מיכל עוטף */
+    img.card-logo {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 168px;
+      height: auto;
+      max-height: 72px;
+      object-fit: contain;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .card-header {
+      padding-left: 188px;
+      min-height: 76px;
+    }
+    h1 {
+      margin: 0 0 6px;
+      color: #0099cc;
+      font-size: 28px;
+    }
+    p {
+      margin: 0 0 14px;
+      color: #4b5563;
+    }
+    label {
+      display: block;
+      margin: 10px 0 6px;
+      font-weight: 600;
+    }
+    .layout-main {
+      display: flex;
+      flex-direction: row;
+      gap: 28px;
+      align-items: flex-start;
+      margin-top: 8px;
+    }
+    .credentials-block {
+      flex: 1;
+      min-width: 0;
+    }
+    .companies-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+      margin-left: 20px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+    input {
+      width: 100%;
+      max-width: 320px;
+      height: 42px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+    .password-wrap {
+      position: relative;
+    }
+    .password-wrap input {
+      padding-left: 44px;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 58%;
+      top: 40%;
+      transform: translateY(-50%);
+      border: 0;
+      background: transparent;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .toggle-password:hover {
+      background: #f3f4f6;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .companies-sidebar .company-btn {
+      width: 100%;
+      min-width: 112px;
+    }
+    .row.actions {
+      gap: 14px;
+      margin-top: 32px;
+    }
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .company-btn {
+      background: #1d4ed8;
+      color: #fff;
+      min-width: 90px;
+    }
+    .company-btn.active {
+      background: #16a34a;
+      box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.35);
+    }
+    .company-btn:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+    .secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+    .danger {
+      background: #fff1f2;
+      color: #b42318;
+      border: 2px solid #fda29b;
+    }
+    .danger:hover {
+      background: #ffe4e8;
+      border-color: #f97066;
+    }
+    .hint-tech {
+      margin-top: 18px;
+      padding: 12px 14px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4b5563;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+    }
+    @media (max-width: 520px) {
+      img.card-logo {
+        width: 120px;
+        max-height: 56px;
+        top: 12px;
+        left: 12px;
+      }
+      .card-header {
+        padding-left: 132px;
+        min-height: 64px;
+      }
+      .layout-main {
+        flex-direction: column;
+        gap: 18px;
+      }
+      .companies-sidebar {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        padding-top: 0;
+      }
+      .companies-sidebar .company-btn {
+        width: auto;
+        min-width: 90px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img class="card-logo" src="shahamLogo.webp" alt="שח״ם" width="200" height="100" />
+    <div class="card-header">
+      <h1>מערכת חידושי פוליסת רכב</h1>
+      <p>מלא משתמש וסיסמה ואז בחר חברה לפתיחת האתר.</p>
+    </div>
+
+    <div class="layout-main">
+      <div class="credentials-block">
+        <label for="email">שם משתמש</label>
+        <input id="email" type="text" placeholder="username" autocomplete="username" required />
+
+        <label for="password">סיסמה</label>
+        <div class="password-wrap">
+          <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" required />
+          <button id="togglePasswordBtn" class="toggle-password" type="button" aria-label="הצג סיסמה">👁</button>
+        </div>
+      </div>
+
+      <div class="companies-sidebar" role="group" aria-label="חברות ביטוח">
+        <button id="migdalBtn" class="company-btn" type="button">מגדל</button>
+        <button id="harelBtn" class="company-btn" type="button">הראל</button>
+        <button id="clalBtn" class="company-btn" type="button" disabled>כלל</button>
+      </div>
+      <div class="companies-sidebar">
+        <button id="phoenixBtn" class="company-btn" type="button" disabled>פניקס</button>
+        <button id="ayalonBtn" class="company-btn" type="button" disabled>איילון</button>
+      </div>
+    </div>
+
+    <div class="row actions">
+      <button id="copyUserBtn" class="secondary" type="button">קלוט נתוני חידוש</button>
+       <button id="closeSiteBtn" class="danger" type="button">סגור אתר</button>
+    </div>
+
+   
+  </div>
+
+  <script>
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const togglePasswordBtn = document.getElementById("togglePasswordBtn");
+    /** שם קבוע לטאב הפורטל — מאפשר לאחזר את אותו חלון גם אחרי ניווט פנימי באתר */
+    const PORTAL_WINDOW_NAME = "insurancePortalTab";
+    let openedWindow = null;
+    /** נשמר לצורך סגירה / הודעות כשה-reference לחלון אבד */
+    let lastOpenedUrl = null;
+
+    /**
+     * מחזיר את חלון הפורטל אם יש reference תקף (בלי לפתוח טאב חדש).
+     */
+    function getPortalWindowIfOpen() {
+      return openedWindow && !openedWindow.closed ? openedWindow : null;
+    }
+
+    /**
+     * ניווט בטאב הפורטל: פתיחה עם אותו שם טאב מנווטת את הטאב הקיים ל-URL (גם אחרי login ל-dashboard).
+     */
+    function navigatePortal(url) {
+      try {
+        const w = window.open(url, PORTAL_WINDOW_NAME);
+        if (w && !w.closed) {
+          openedWindow = w;
+          w.focus();
+          return true;
+        }
+      } catch (e) {
+        /* ignore */
+      }
+      alert("אין טאב פורטל פעיל לניווט. פתח קודם אתר מכפתור חברה.");
+      return false;
+    }
+
+    /**
+     * סגירה אגרסיבית: קודם reference; אם אין — ניסיון לאחזר טאב לפי שם עם about:blank (לרוב מסיר חסימת סגירה אחרי SPA).
+     */
+    function closePortal() {
+      const tryCloseOnce = (win) => {
+        if (!win) return false;
+        if (win.closed) return true;
+        try {
+          win.close();
+        } catch (e) {
+          return false;
+        }
+        return win.closed;
+      };
+
+      let win = getPortalWindowIfOpen();
+      if (!win) {
+        try {
+          win = window.open("about:blank", PORTAL_WINDOW_NAME);
+        } catch (e) {
+          win = null;
+        }
+      }
+      if (!win || win.closed) {
+        alert(
+          "לא נמצא טאב פורטל לסגירה. פתח קודם אתר מכפתור חברה.\n" +
+            (lastOpenedUrl ? "כתובת פתיחה אחרונה: " + lastOpenedUrl : "")
+        );
+        return;
+      }
+
+      openedWindow = win;
+
+      if (tryCloseOnce(win)) {
+        openedWindow = null;
+        lastOpenedUrl = null;
+        return;
+      }
+
+      try {
+        win.location.replace("about:blank");
+      } catch (e) {
+        /* חוצה דומיין — לפעמים נחסם */
+      }
+      if (tryCloseOnce(win)) {
+        openedWindow = null;
+        lastOpenedUrl = null;
+        return;
+      }
+
+      alert(
+        "לא ניתן לסגור אוטומטית (מדיניות דפדפן/אתר). סגור ידנית את הטאב.\n" +
+          (lastOpenedUrl ? "כתובת פתיחה: " + lastOpenedUrl : "")
+      );
+    }
+
+    const companyUrls = {
+      migdalBtn: "https://apmaccess.migdal.co.il/my.policy",
+      harelBtn: "https://noya-sandbox.klaro360.com/login",
+      clalBtn: "",
+      phoenixBtn: "",
+      ayalonBtn: ""
+    };
+
+    async function copyText(text) {
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+        alert("הועתק ללוח");
+      } catch (err) {
+        alert("לא ניתן להעתיק אוטומטית. אפשר להעתיק ידנית.");
+      }
+    }
+
+    function setActiveCompany(buttonId) {
+      const buttons = document.querySelectorAll(".company-btn");
+      buttons.forEach((btn) => {
+        if (btn.id === buttonId) {
+          btn.classList.add("active");
+        } else {
+          btn.classList.remove("active");
+        }
+      });
+    }
+
+    function openCompanySite(buttonId) {
+      setActiveCompany(buttonId);
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      const targetUrl = companyUrls[buttonId];
+
+      if (!email || !password) {
+        alert("נא למלא יוזר וסיסמה לפני פתיחה.");
+        return;
+      }
+      if (!targetUrl) {
+        alert("לכפתור זה עדיין לא הוגדרה כתובת.");
+        return;
+      }
+      lastOpenedUrl = targetUrl;
+      // לא משתמשים ב-noopener כאן: בדפדפנים מודרניים זה גורם ל-window.open להחזיר null
+      // גם כשהטאב נפתח בפועל — ואז איבוד reference לסגירה + הודעת "חסימה" שגויה.
+      openedWindow = window.open(targetUrl, PORTAL_WINDOW_NAME);
+      if (!openedWindow) {
+        lastOpenedUrl = null;
+        alert("הדפדפן חסם פתיחת חלון חדש. יש לאפשר popups עבור הקובץ הזה.");
+      }
+    }
+
+    document.getElementById("migdalBtn").addEventListener("click", () => openCompanySite("migdalBtn"));
+    document.getElementById("harelBtn").addEventListener("click", () => openCompanySite("harelBtn"));
+    document.getElementById("clalBtn").addEventListener("click", () => openCompanySite("clalBtn"));
+    document.getElementById("phoenixBtn").addEventListener("click", () => openCompanySite("phoenixBtn"));
+    document.getElementById("ayalonBtn").addEventListener("click", () => openCompanySite("ayalonBtn"));
+
+    document.getElementById("copyUserBtn").addEventListener("click", () => {
+      copyText(emailInput.value.trim());
+    });
+    document.getElementById("closeSiteBtn").addEventListener("click", () => {
+      closePortal();
+    });
+
+    togglePasswordBtn.addEventListener("click", () => {
+      const isHidden = passwordInput.type === "password";
+      passwordInput.type = isHidden ? "text" : "password";
+      togglePasswordBtn.textContent = isHidden ? "🙈" : "👁";
+      togglePasswordBtn.setAttribute("aria-label", isHidden ? "הסתר סיסמה" : "הצג סיסמה");
+    });
+  </script>
+</body>
+</html>
